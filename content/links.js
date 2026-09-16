@@ -4,7 +4,7 @@ window.festivalContent.links = {
   "heading": "SNSリンク",
   "items": [
     {
-      "platform": "X",
+      "platform": "Twitter (現:X)",
       "account": "千葉大学情報・データサイエンス学部2026大学祭広報課",
       "url": "https://x.com/chibaudsfes2025",
       "label": "デー祭公式Xはこちら",
