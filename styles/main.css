@@ -56,3 +56,13 @@ body.sidebar-open { overflow: hidden; }
   .social-grid .platform { font-size: .85rem; }
   .social-grid .account, .social-grid .link-label { font-size: .75rem; }
 }
+
+.news-date { color: #456176; font-size: .875rem; }
+.project-disclosure { border: 1px solid #cbdbe7; border-radius: 12px; overflow: hidden; }
+.project-disclosure summary { padding: 20px 24px; cursor: pointer; color: #14354d; background: #f5f9fc; }
+.project-disclosure summary h3 { display: inline; font-size: 1.1rem; }
+.project-disclosure summary:focus-visible { outline: 3px solid #07558e; outline-offset: -3px; }
+.project-disclosure[open] summary { border-bottom: 1px solid #cbdbe7; }
+.project-body { display: grid; gap: 12px; min-width: 0; }
+.project-disclosure .project-body { padding: 20px 24px; }
+@media (max-width: 480px) { .project-disclosure summary, .project-disclosure .project-body { padding: 18px; } }

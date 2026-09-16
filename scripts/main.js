@@ -99,13 +99,35 @@
     block.append(list);
   }
 
+  const news = (content.news?.items || []).filter(item => item.title?.trim());
+  if (news.length) {
+    const block = section("news", content.news.heading || "お知らせ");
+    const list = element("div", "", "card-list");
+    news.forEach(item => {
+      const card = element("article", "", "card news-card");
+      addText(card, "p", item.date, "news-date");
+      addText(card, "h3", item.title);
+      addText(card, "p", item.body, "multiline");
+      addLink(card, item.url, item.linkLabel || "詳しく見る");
+      list.append(card);
+    });
+    block.append(list);
+  }
+
   const projects = (content.projects?.items || []).filter(item => item.title?.trim());
   if (projects.length) {
     const block = section("projects", content.projects.heading || "企画内容");
     const list = element("div", "", "card-list");
     projects.forEach(item => {
-      const card = element("article", "", "card");
-      addText(card, "h3", item.title);
+      const wrapper = element(item.collapsible ? "details" : "article", "", item.collapsible ? "project-disclosure" : "card");
+      if (item.collapsible) {
+        const summary = element("summary");
+        addText(summary, "h3", item.title);
+        wrapper.append(summary);
+      } else {
+        addText(wrapper, "h3", item.title);
+      }
+      const card = element("div", "", "project-body");
       if (safeUrl(item.image)) {
         const image = element("img", "", "project-image");
         image.src = safeUrl(item.image);
@@ -124,7 +146,12 @@
       });
       if (details.childElementCount) card.append(details);
       addLink(card, item.url, item.linkLabel);
-      list.append(card);
+      if (item.notes?.trim()) {
+        addText(card, "h4", "注意事項", "subheading");
+        addText(card, "p", item.notes, "multiline");
+      }
+      if (card.childElementCount) wrapper.append(card);
+      list.append(wrapper);
     });
     block.append(list);
   }
@@ -200,8 +227,8 @@
     });
     root.append(opener, dialog);
   }
-  // 掲載情報.mdの順：企画内容 → アクセスマップ → SNS → 案内・注意事項
-  ["projects", "access", "links", "notices"].forEach(id => {
+  // 掲載情報.mdの順：お知らせ → 企画内容 → アクセスマップ → 注意事項 → SNS
+  ["news", "projects", "access", "notices", "links"].forEach(id => {
     if (sections.has(id)) root.append(sections.get(id));
   });
 })();

@@ -10,6 +10,7 @@
 
 | 編集内容 | ファイル |
 | --- | --- |
+| お知らせ | [content/news.js](content/news.js) |
 | タイトル・ロゴ・冒頭紹介文 | [content/title.js](content/title.js) |
 | タブの文言・順序・表示 | [content/tabs.js](content/tabs.js) |
 | アクセスマップ・出典 | [content/access.js](content/access.js) |
@@ -24,6 +25,7 @@
 ```text
 index.html            ページの入口
 content/
+  news.js             お知らせ編集
   title.js            タイトル編集
   tabs.js             タブ編集
   access.js           アクセスマップ編集
@@ -31,14 +33,14 @@ content/
   projects.js         企画内容編集
   notices.js          案内・注意事項編集
 scripts/
-  main.js             上記6ファイルを統合
+  main.js             上記7ファイルを統合
 styles/
   main.css            共通デザイン
 assets/
   logo.png            ロゴ画像（既存の画像）
 ```
 
-index.html が6つの編集ファイルを順に読み込んだ後、main.js がページを組み立てます。ビルド操作は不要です。main ブランチは公開用のブランチ、main.js はページの統合処理であり、役割が異なります。
+index.html が7つの編集ファイルを順に読み込んだ後、main.js がページを組み立てます。ビルド操作は不要です。main ブランチは公開用のブランチ、main.js はページの統合処理であり、役割が異なります。
 
 ## 編集方法
 
@@ -55,14 +57,16 @@ index.html が6つの編集ファイルを順に読み込んだ後、main.js が
 - 左上の「☰ メニュー」を押すと、左サイドバーにタブが展開します。各タブはページ内の項目へ移動するリンクです。
 - 「閉じる ×」、背景クリック、Escapeキーで閉じられます。項目を選ぶとサイドバーを閉じて移動します。
 - メニューボタンとサイドバー見出しは tabs.js の menuLabel / heading で編集できます。
-- target は access / links / projects / notices から選びます。タブの順序は tabs.js の配列順です。
+- target は news / access / links / projects / notices から選びます。タブの順序は tabs.js の配列順です。
 - enabled: false にするとタブ全体を非表示にできます。
 - 企画は title、案内は title または body が記入されると表示します。リンクはURLとリンク文言が必要です。
 - 本文のない項目と、その項目を指すタブは表示しません。未入力の項目は掲載しません。
-- 本文の順序は main.js で「企画内容 → アクセスマップ → リンク → 案内・注意事項」としています。
+- 本文の順序は main.js で「お知らせ → 企画内容 → アクセスマップ → 注意事項 → SNS」としています。
 
 ## 公開・運用
 
 GitHub Pagesの設定は Settings → Pages → Deploy from a branch → main / (root) です。mainへの変更は公開対象になるため、確認前の編集は別ブランチで進め、確認後にmainへ統合できます。
 
 掲載情報.md は原稿整理用です。変更を自動で取り込む仕組みはないため、確認した内容を対応する content/ のファイルへ反映します。未確定の内容や編集用メモは掲載しません。
+
+企画の collapsible: true は開閉式表示です。企画固有の注意事項は projects.js の notes、全体の注意事項は notices.js で編集します。
