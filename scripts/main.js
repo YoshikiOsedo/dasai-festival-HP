@@ -52,7 +52,29 @@
   const heading = element("h1", title.heading || title.pageTitle || "大学祭宣伝", title.heading ? "" : "visually-hidden");
   header.append(heading);
   addText(header, "p", title.introduction, "multiline");
+  const overview = element("dl", "", "event-details");
+  [["festivalName", "名称"], ["date", "開催日"], ["time", "開催時間"], ["venue", "会場"]].forEach(([key, label]) => {
+    if (title[key]?.trim()) overview.append(element("dt", label), element("dd", title[key]));
+  });
+  if (overview.childElementCount) header.append(overview);
   root.replaceChildren(header);
+
+  const access = content.access || {};
+  if (safeUrl(access.image)) {
+    const block = section("access", access.heading || "アクセスマップ");
+    const figure = element("figure", "", "access-map");
+    const link = element("a");
+    link.href = safeUrl(access.image);
+    link.setAttribute("aria-label", "キャンパスマップを拡大して表示");
+    const image = element("img", "", "map-image");
+    image.src = safeUrl(access.image);
+    image.alt = access.imageAlt || "キャンパスマップ";
+    link.append(image);
+    figure.append(link);
+    addText(figure, "figcaption", access.credit, "map-credit");
+    block.append(figure);
+    addText(block, "p", access.description, "multiline");
+  }
 
   const links = (content.links?.items || []).filter(item => safeUrl(item.url) && item.label);
   if (links.length) {
@@ -61,7 +83,15 @@
     links.forEach(item => {
       const link = element("a", "", "social-link");
       link.href = safeUrl(item.url);
-      addText(link, "span", item.platform, "platform");
+      const platform = element("span", "", "platform");
+      if (safeUrl(item.icon)) {
+        const icon = element("img", "", "social-icon");
+        icon.src = safeUrl(item.icon);
+        icon.alt = "";
+        platform.append(icon);
+      }
+      addText(platform, "span", item.platform);
+      link.append(platform);
       addText(link, "span", item.account, "account");
       addText(link, "span", item.label, "link-label");
       list.append(link);
@@ -166,6 +196,6 @@
     });
     root.append(opener, dialog);
   }
-  // ページ本文の表示順：リンク → 企画内容 → 案内・注意事項
+  // ページ本文の表示順：アクセスマップ → リンク → 企画内容 → 案内・注意事項
   sections.forEach(node => root.append(node));
 })();

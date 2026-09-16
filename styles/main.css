@@ -34,3 +34,10 @@ button { font: inherit; cursor: pointer; }
 .sidebar-links { display: grid; gap: 12px; }
 .sidebar-links a { display: block; padding: 14px 16px; border: 1px solid #cbdbe7; border-radius: 10px; color: #064e83; text-decoration: none; overflow-wrap: anywhere; }
 body.sidebar-open { overflow: hidden; }
+
+.event-details { width: 100%; padding: 20px; background: #f0f6fa; border-radius: 12px; text-align: left; overflow-wrap: anywhere; }
+.access-map { margin: 0; }
+.map-image { display: block; width: 100%; height: auto; border: 1px solid #cbdbe7; border-radius: 8px; }
+.map-credit { margin-top: 10px; font-size: .875rem; color: #456176; text-align: right; }
+.platform { display: flex; align-items: center; gap: 12px; }
+.social-icon { width: 32px; height: 32px; object-fit: contain; flex: 0 0 32px; }

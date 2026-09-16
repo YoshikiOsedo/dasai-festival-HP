@@ -12,6 +12,7 @@
 | --- | --- |
 | タイトル・ロゴ・冒頭紹介文 | [content/title.js](content/title.js) |
 | タブの文言・順序・表示 | [content/tabs.js](content/tabs.js) |
+| アクセスマップ・出典 | [content/access.js](content/access.js) |
 | SNSなどのリンク | [content/links.js](content/links.js) |
 | 企画内容 | [content/projects.js](content/projects.js) |
 | 案内・注意事項 | [content/notices.js](content/notices.js) |
@@ -25,18 +26,19 @@ index.html            ページの入口
 content/
   title.js            タイトル編集
   tabs.js             タブ編集
+  access.js           アクセスマップ編集
   links.js            リンク編集
   projects.js         企画内容編集
   notices.js          案内・注意事項編集
 scripts/
-  main.js             上記5ファイルを統合
+  main.js             上記6ファイルを統合
 styles/
   main.css            共通デザイン
 assets/
   logo.png            ロゴ画像（既存の画像）
 ```
 
-index.html が5つの編集ファイルを順に読み込んだ後、main.js がページを組み立てます。ビルド操作は不要です。main ブランチは公開用のブランチ、main.js はページの統合処理であり、役割が異なります。
+index.html が6つの編集ファイルを順に読み込んだ後、main.js がページを組み立てます。ビルド操作は不要です。main ブランチは公開用のブランチ、main.js はページの統合処理であり、役割が異なります。
 
 ## 編集方法
 
@@ -53,11 +55,11 @@ index.html が5つの編集ファイルを順に読み込んだ後、main.js が
 - 左上の「☰ メニュー」を押すと、左サイドバーにタブが展開します。各タブはページ内の項目へ移動するリンクです。
 - 「閉じる ×」、背景クリック、Escapeキーで閉じられます。項目を選ぶとサイドバーを閉じて移動します。
 - メニューボタンとサイドバー見出しは tabs.js の menuLabel / heading で編集できます。
-- target は links / projects / notices から選びます。タブの順序は tabs.js の配列順です。
+- target は access / links / projects / notices から選びます。タブの順序は tabs.js の配列順です。
 - enabled: false にするとタブ全体を非表示にできます。
 - 企画は title、案内は title または body が記入されると表示します。リンクはURLとリンク文言が必要です。
-- 本文のない項目と、その項目を指すタブは表示しません。現状はSNSリンクのみを掲載しています。
-- 本文の順序は main.js で「リンク → 企画内容 → 案内・注意事項」としています。
+- 本文のない項目と、その項目を指すタブは表示しません。未入力の項目は掲載しません。
+- 本文の順序は main.js で「アクセスマップ → リンク → 企画内容 → 案内・注意事項」としています。
 
 ## 公開・運用
 

@@ -3,7 +3,10 @@
 window.festivalContent = window.festivalContent || {};
 window.festivalContent.projects = {
   heading: "企画内容",
-  items: []
+  items: [
+    { title: "デー祭展示会", description: "" },
+    { title: "デー祭食堂", description: "" }
+  ]
 };
 
 /* 記入例（コメントなのでHPには表示されません）
