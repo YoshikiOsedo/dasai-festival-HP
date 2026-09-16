@@ -109,18 +109,62 @@
     block.append(list);
   }
 
-  // 本文がある項目だけをナビゲーションに表示します。
+  // タブを、開閉できる左サイドバーにまとめます。
   const tabs = content.tabs || {};
-  if (tabs.enabled) {
-    const nav = element("nav", "", "tabs");
+  const visibleTabs = (tabs.items || []).filter(item => sections.has(item.target) && item.label);
+  if (tabs.enabled && visibleTabs.length) {
+    root.classList.add("has-sidebar");
+    const opener = element("button", tabs.menuLabel || "☰ メニュー", "menu-toggle");
+    opener.type = "button";
+    opener.setAttribute("aria-controls", "site-sidebar");
+    opener.setAttribute("aria-expanded", "false");
+    opener.setAttribute("aria-haspopup", "dialog");
+
+    const dialog = element("dialog", "", "sidebar");
+    dialog.id = "site-sidebar";
+    dialog.setAttribute("aria-labelledby", "sidebar-heading");
+    const bar = element("div", "", "sidebar-header");
+    const label = element("h2", tabs.heading || "メニュー");
+    label.id = "sidebar-heading";
+    const closer = element("button", "閉じる ×", "menu-close");
+    closer.type = "button";
+    bar.append(label, closer);
+    const nav = element("nav", "", "sidebar-links");
     nav.setAttribute("aria-label", "ページ内ナビゲーション");
-    (tabs.items || []).forEach(item => {
-      if (!sections.has(item.target) || !item.label) return;
+    visibleTabs.forEach(item => {
       const link = element("a", item.label);
       link.href = "#" + item.target;
+      link.addEventListener("click", () => {
+        dialog.close();
+        // ダイアログを閉じてから、リンク先の見出しへフォーカスを移します。
+        requestAnimationFrame(() => {
+          const heading = sections.get(item.target).querySelector("h2");
+          heading.tabIndex = -1;
+          heading.focus({ preventScroll: true });
+        });
+      });
       nav.append(link);
     });
-    if (nav.childElementCount) root.append(nav);
+    dialog.append(bar, nav);
+    opener.addEventListener("click", () => {
+      dialog.showModal();
+      opener.setAttribute("aria-expanded", "true");
+      document.body.classList.add("sidebar-open");
+      closer.focus();
+    });
+    closer.addEventListener("click", () => dialog.close());
+    // 背景クリックで閉じます。Escape とフォーカス制御は dialog の標準動作です。
+    dialog.addEventListener("click", event => {
+      if (event.target !== dialog) return;
+      const bounds = dialog.getBoundingClientRect();
+      if (event.clientX < bounds.left || event.clientX > bounds.right ||
+          event.clientY < bounds.top || event.clientY > bounds.bottom) dialog.close();
+    });
+    dialog.addEventListener("close", () => {
+      opener.setAttribute("aria-expanded", "false");
+      document.body.classList.remove("sidebar-open");
+    });
+    root.append(opener, dialog);
   }
   // ページ本文の表示順：リンク → 企画内容 → 案内・注意事項
   sections.forEach(node => root.append(node));
