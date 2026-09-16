@@ -1,15 +1,11 @@
-// 案内・注意事項を編集します。items が空のときは表示しません。
+// 掲載情報.mdの記入済み内容を反映しています。
 window.festivalContent = window.festivalContent || {};
 window.festivalContent.notices = {
-  heading: "案内・注意事項",
-  items: []
+  "heading": "案内・注意事項",
+  "items": [
+    {
+      "title": "デー祭食堂",
+      "body": "※本製品は以下のアレルギー項目を含みます\n    ＞＞小麦・豚肉・大豆\n※ソース焼きそばのみの販売です\n※お支払い方法は現金またはPayPay(予定)です\n※お召し上がりは『デー祭展示会』ブース内に設営する食事可能エリアでも可能です。"
+    }
+  ]
 };
-
-/* 記入例（items の [ ] 内へコピーして使用）
-{
-  title: "案内の見出し",
-  body: "来場者に伝える内容",
-  url: "", // 必要な場合だけ https:// URL を記入
-  linkLabel: "詳しい案内を見る"
-}
-*/

@@ -64,7 +64,7 @@
     const block = section("access", access.heading || "アクセスマップ");
     const figure = element("figure", "", "access-map");
     const link = element("a");
-    link.href = safeUrl(access.image);
+    link.href = "./map.html";
     link.setAttribute("aria-label", "キャンパスマップを拡大して表示");
     const image = element("img", "", "map-image");
     image.src = safeUrl(access.image);
@@ -79,7 +79,7 @@
   const links = (content.links?.items || []).filter(item => safeUrl(item.url) && item.label);
   if (links.length) {
     const block = section("links", content.links.heading || "リンク");
-    const list = element("div", "", "card-list");
+    const list = element("div", "", "card-list social-grid");
     links.forEach(item => {
       const link = element("a", "", "social-link");
       link.href = safeUrl(item.url);
@@ -114,6 +114,10 @@
         card.append(image);
       }
       addText(card, "p", item.description, "multiline");
+      if (item.orderInstructions?.trim()) {
+        addText(card, "h4", "注文方法", "subheading");
+        addText(card, "p", item.orderInstructions, "multiline");
+      }
       const details = element("dl");
       [["date", "開催日"], ["time", "開催時間"], ["location", "場所"], ["price", "料金・価格"], ["participation", "参加方法"]].forEach(([key, label]) => {
         if (item[key]?.trim()) details.append(element("dt", label), element("dd", item[key]));

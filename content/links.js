@@ -1,10 +1,10 @@
-// SNSリンクとロゴ。URL・文言・iconを個別に編集できます。
+// 掲載情報.mdの記入済み内容を反映しています。
 window.festivalContent = window.festivalContent || {};
 window.festivalContent.links = {
   "heading": "SNSリンク",
   "items": [
     {
-      "platform": "Twitter (現:X)",
+      "platform": "Twitter(現: X)",
       "account": "千葉大学情報・データサイエンス学部2026大学祭広報課",
       "url": "https://x.com/chibaudsfes2025",
       "label": "デー祭公式Xはこちら",

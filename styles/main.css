@@ -41,3 +41,18 @@ body.sidebar-open { overflow: hidden; }
 .map-credit { margin-top: 10px; font-size: .875rem; color: #456176; text-align: right; }
 .platform { display: flex; align-items: center; gap: 12px; }
 .social-icon { width: 32px; height: 32px; object-fit: contain; flex: 0 0 32px; }
+
+/* マップ全体を中央に置き、SNSは画面幅によらず3列で表示 */
+.access-map { width: 100%; margin-inline: auto; }
+.access-map > a { display: block; width: 100%; margin-inline: auto; }
+.map-image { max-width: 100%; margin-inline: auto; object-fit: contain; }
+.social-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.social-grid .social-link { min-width: 0; align-content: start; padding: 16px; }
+.social-grid .platform { flex-wrap: wrap; gap: 8px; }
+.subheading { margin: 18px 0 4px; font-size: 1rem; }
+@media (max-width: 480px) {
+  .social-grid { gap: 8px; }
+  .social-grid .social-link { padding: 10px 8px; }
+  .social-grid .platform { font-size: .85rem; }
+  .social-grid .account, .social-grid .link-label { font-size: .75rem; }
+}

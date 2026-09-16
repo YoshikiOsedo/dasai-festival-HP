@@ -1,26 +1,16 @@
-// 企画内容を編集します。items が空のときは、このセクションを表示しません。
-// 下の記入例を items の [ ] 内へコピーし、確定した内容だけを記入してください。
+// 掲載情報.mdの記入済み内容を反映しています。
 window.festivalContent = window.festivalContent || {};
 window.festivalContent.projects = {
-  heading: "企画内容",
-  items: [
-    { title: "デー祭展示会", description: "" },
-    { title: "デー祭食堂", description: "" }
+  "heading": "企画内容",
+  "items": [
+    {
+      "title": "デー祭展示会",
+      "description": ""
+    },
+    {
+      "title": "デー祭食堂",
+      "description": "キャベツ、もやし、人参、豚肉を使ったソース焼きそばです。\n麺と具材をソースで炒め、香ばしく仕上げています。\n青のり、鰹節、紅しょうがを添えて、風味豊かに仕上げました。\n学祭のお供に、ぜひお召し上がりください。",
+      "orderInstructions": "① 店員にお声がけください\n\n② トッピングの有無をお伝えください\n　青のり・紅しょうが・鰹節の有無をお選びいただけます\n\n③ 代金を支払い、整理券をお受け取りください\n    整理券には呼び出し番号が記載されています\n\n④ 呼び出し画面にご自身の番号が表示されたら、受け取り口へお越しください\n\n⑤ 商品を受け取って『デー祭展示会』ブースの食事可能スペースで召し上がってください"
+    }
   ]
 };
-
-/* 記入例（コメントなのでHPには表示されません）
-{
-  title: "企画名",
-  description: "紹介文",
-  date: "開催日",
-  time: "開催時間",
-  location: "開催場所",
-  price: "料金・価格",
-  participation: "参加方法",
-  image: "", // 画像を使う場合は ./assets/画像名.png
-  imageAlt: "",
-  url: "", // 関連ページの https:// URL
-  linkLabel: "詳しく見る"
-}
-*/
