@@ -196,6 +196,8 @@
     });
     root.append(opener, dialog);
   }
-  // ページ本文の表示順：アクセスマップ → リンク → 企画内容 → 案内・注意事項
-  sections.forEach(node => root.append(node));
+  // 掲載情報.mdの順：企画内容 → アクセスマップ → SNS → 案内・注意事項
+  ["projects", "access", "links", "notices"].forEach(id => {
+    if (sections.has(id)) root.append(sections.get(id));
+  });
 })();

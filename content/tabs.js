@@ -6,9 +6,9 @@ window.festivalContent.tabs = {
   menuLabel: "☰ メニュー", // サイドバーを開くボタン
   heading: "メニュー", // サイドバー内の見出し
   items: [
+    { label: "企画内容", target: "projects" },
     { label: "アクセスマップ", target: "access" },
     { label: "SNSリンク", target: "links" },
-    { label: "企画内容", target: "projects" },
     { label: "案内・注意事項", target: "notices" }
   ]
 };
