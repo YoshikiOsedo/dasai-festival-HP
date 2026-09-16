@@ -102,16 +102,41 @@
   const news = (content.news?.items || []).filter(item => item.title?.trim());
   if (news.length) {
     const block = section("news", content.news.heading || "お知らせ");
-    const list = element("div", "", "card-list");
-    news.forEach(item => {
-      const card = element("article", "", "card news-card");
-      addText(card, "p", item.date, "news-date");
-      addText(card, "h3", item.title);
-      addText(card, "p", item.body, "multiline");
-      addLink(card, item.url, item.linkLabel || "詳しく見る");
-      list.append(card);
+    const controls = element("div", "", "news-controls");
+    const label = element("label", "更新日順");
+    label.htmlFor = "news-sort";
+    const select = element("select");
+    select.id = "news-sort";
+    [["desc", "新しい順（降順）"], ["asc", "古い順（昇順）"]].forEach(([value, text]) => {
+      const option = element("option", text);
+      option.value = value;
+      select.append(option);
     });
-    block.append(list);
+    select.value = "desc";
+    controls.append(label, select);
+    const list = element("div", "", "card-list");
+    function dateValue(value) {
+      const parts = String(value || "").match(new RegExp("^([0-9]{4})[./-]([0-9]{1,2})[./-]([0-9]{1,2})$"));
+      return parts ? Date.UTC(Number(parts[1]), Number(parts[2]) - 1, Number(parts[3])) : 0;
+    }
+    function renderNews() {
+      const sorted = [...news].sort((a, b) => (select.value === "asc" ? 1 : -1) * (dateValue(a.date) - dateValue(b.date)));
+      list.replaceChildren();
+      sorted.forEach(item => {
+        const card = element("details", "", "project-disclosure news-disclosure");
+        const summary = element("summary");
+        addText(summary, "h3", item.title);
+        const body = element("div", "", "project-body");
+        addText(body, "p", item.date, "news-date");
+        addText(body, "p", item.body, "multiline");
+        addLink(body, item.url, item.linkLabel || "詳しく見る");
+        card.append(summary, body);
+        list.append(card);
+      });
+    }
+    select.addEventListener("change", renderNews);
+    renderNews();
+    block.append(controls, list);
   }
 
   const projects = (content.projects?.items || []).filter(item => item.title?.trim());
@@ -140,8 +165,14 @@
         addText(card, "h4", "注文方法", "subheading");
         addText(card, "p", item.orderInstructions, "multiline");
       }
+      if (item.exhibits?.length) {
+        addText(card, "h4", "展示物一覧", "subheading");
+        const exhibits = element("div", "", "exhibit-list");
+        item.exhibits.forEach(text => addText(exhibits, "p", text, "multiline"));
+        card.append(exhibits);
+      }
       const details = element("dl");
-      [["date", "開催日"], ["time", "開催時間"], ["location", "場所"], ["price", "料金・価格"], ["participation", "参加方法"]].forEach(([key, label]) => {
+      [["date", "開催日"], ["time", "開催時間"], ["location", "場所"], ["price", "料金・価格"], ["participation", "参加方法"], ["payment", "支払方法"]].forEach(([key, label]) => {
         if (item[key]?.trim()) details.append(element("dt", label), element("dd", item[key]));
       });
       if (details.childElementCount) card.append(details);

@@ -66,3 +66,11 @@ body.sidebar-open { overflow: hidden; }
 .project-body { display: grid; gap: 12px; min-width: 0; }
 .project-disclosure .project-body { padding: 20px 24px; }
 @media (max-width: 480px) { .project-disclosure summary, .project-disclosure .project-body { padding: 18px; } }
+
+.event-details { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 6px; }
+.event-details dt:not(:first-child) { margin-top: 12px; }
+.event-details dd { width: 100%; margin: 0; }
+.news-controls { display: flex; align-items: center; justify-content: flex-end; gap: 10px; margin-bottom: 14px; flex-wrap: wrap; }
+.news-controls select { font: inherit; min-height: 44px; padding: 8px; background: white; color: #14354d; border: 1px solid #cbdbe7; border-radius: 8px; max-width: 100%; }
+.news-controls select:focus-visible { outline: 3px solid #07558e; outline-offset: 3px; }
+.exhibit-list { display: grid; gap: 12px; }
