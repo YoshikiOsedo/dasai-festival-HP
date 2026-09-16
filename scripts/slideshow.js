@@ -30,7 +30,11 @@ window.createFestivalSlideshow = function (config) {
   let ready = false;
   let current = 0;
   let timer;
-  function label() { button.textContent = paused ? "再生" : "一時停止"; }
+  function label() {
+    button.setAttribute("aria-label", paused ? "再生" : "一時停止");
+    button.title = paused ? "再生" : "一時停止";
+    button.setAttribute("data-paused", String(paused));
+  }
   function schedule(delay = interval - duration) {
     clearTimeout(timer);
     if (!paused && !document.hidden && ready) timer = setTimeout(advance, delay);
@@ -48,7 +52,7 @@ window.createFestivalSlideshow = function (config) {
   window.addEventListener("pagehide", () => clearTimeout(timer));
   window.addEventListener("pageshow", () => schedule());
   label();
-  wrapper.append(button);
+  stage.append(button);
   Promise.all(images.map(image => image.decode().catch(() => {}))).then(() => {
     ready = true;
     schedule();
