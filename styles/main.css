@@ -74,3 +74,11 @@ body.sidebar-open { overflow: hidden; }
 .news-controls select { font: inherit; min-height: 44px; padding: 8px; background: white; color: #14354d; border: 1px solid #cbdbe7; border-radius: 8px; max-width: 100%; }
 .news-controls select:focus-visible { outline: 3px solid #07558e; outline-offset: 3px; }
 .exhibit-list { display: grid; gap: 12px; }
+
+/* 写真全体が見える中央配置。縦横比が違う画像でもページが跳ねません。 */
+.slideshow { width: 100%; display: grid; justify-items: center; gap: 10px; }
+.slideshow-stage { width: 100%; aspect-ratio: 16 / 9; position: relative; overflow: hidden; background: #f0f6fa; border-radius: 12px; }
+.slideshow-image { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; opacity: 0; transition: opacity var(--slide-transition, 1000ms) linear; }
+.slideshow-image.is-active { opacity: 1; }
+.slideshow-toggle { min-height: 44px; padding: 8px 16px; border: 1px solid #cbdbe7; border-radius: 8px; background: #fff; color: #064e83; }
+@media (prefers-reduced-motion: reduce) { .slideshow-image { transition: none; } }

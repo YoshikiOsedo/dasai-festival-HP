@@ -70,3 +70,11 @@ GitHub Pagesの設定は Settings → Pages → Deploy from a branch → main / 
 掲載情報.md は原稿整理用です。変更を自動で取り込む仕組みはないため、確認した内容を対応する content/ のファイルへ反映します。未確定の内容や編集用メモは掲載しません。
 
 企画の collapsible: true は開閉式表示です。企画固有の注意事項は projects.js の notes、全体の注意事項は notices.js で編集します。
+
+## 上部スライドショー
+- 写真は assets/slideshow/ に保存し、content/slideshow.js の items に画像パスを順番に記入します。
+- 現在は demophoto1.jpg → demophoto2.jpg → demophoto3.jpg の順番です。
+- interval: 6000 / transition: 1000 は、5秒静止＋1秒の切り替えです。
+- 写真全体を中央に表示します。一時停止・再生ボタンで操作できます。
+- 端末で動きを減らす設定をしている場合は停止状態から開始します。
+- 表示処理は scripts/slideshow.js に分離しています。

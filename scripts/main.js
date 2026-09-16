@@ -43,7 +43,10 @@
   if (title.pageTitle) document.title = title.pageTitle;
   const header = element("header", "", "page-header");
   const logoUrl = safeUrl(title.logo);
-  if (logoUrl) {
+  const slideshow = window.createFestivalSlideshow?.(content.slideshow || {});
+  if (slideshow) {
+    header.append(slideshow);
+  } else if (logoUrl) {
     const image = element("img", "", "logo");
     image.src = logoUrl;
     image.alt = title.logoAlt || "";
@@ -107,7 +110,7 @@
     label.htmlFor = "news-sort";
     const select = element("select");
     select.id = "news-sort";
-    [["desc", "新しい順（降順）"], ["asc", "古い順（昇順）"]].forEach(([value, text]) => {
+    [["desc", "新しい順"], ["asc", "古い順"]].forEach(([value, text]) => {
       const option = element("option", text);
       option.value = value;
       select.append(option);
