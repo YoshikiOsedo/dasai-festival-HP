@@ -2,5 +2,11 @@
 window.festivalContent = window.festivalContent || {};
 window.festivalContent.notices = {
   "heading": "注意事項",
-  "items": []
+  "items": [
+    {
+      "body": "Comming Soon ..."
+    }
+  ]
 };
+
+
