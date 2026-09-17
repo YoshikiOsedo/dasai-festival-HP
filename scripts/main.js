@@ -204,6 +204,12 @@
     block.append(list);
   }
 
+  const about = content.about || {};
+  if (about.body?.trim()) {
+    const block = section("about", about.heading || "デーサイ企画部とはどんな集団？");
+    addText(block, "p", about.body, "multiline");
+  }
+
   // タブを、開閉できる左サイドバーにまとめます。
   const tabs = content.tabs || {};
   const visibleTabs = (tabs.items || []).filter(item => sections.has(item.target) && item.label);
@@ -261,8 +267,9 @@
     });
     root.append(opener, dialog);
   }
-  // 掲載情報.mdの順：お知らせ → 企画内容 → アクセスマップ → 注意事項 → SNS
-  ["news", "projects", "access", "notices", "links"].forEach(id => {
+  // 掲載情報.mdの順：お知らせ → 企画内容 → アクセスマップ → 注意事項 → 企画部紹介 → SNS
+  ["news", "projects", "access", "notices", "about", "links"].forEach(id => {
     if (sections.has(id)) root.append(sections.get(id));
   });
 })();
+
