@@ -17,6 +17,7 @@
 | SNSなどのリンク | [content/links.js](content/links.js) |
 | 企画内容 | [content/projects.js](content/projects.js) |
 | 案内・注意事項 | [content/notices.js](content/notices.js) |
+| デーサイ企画部の紹介 | [content/about.js](content/about.js) |
 | 上部スライドショーの画像・順序・表示時間 | [content/slideshow.js](content/slideshow.js) |
 | 全体の統合・本文の表示順 | [scripts/main.js](scripts/main.js) |
 | 色・余白・文字サイズ | [styles/main.css](styles/main.css) |
@@ -33,6 +34,7 @@ content/
   links.js            リンク編集
   projects.js         企画内容編集
   notices.js          案内・注意事項編集
+  about.js            デーサイ企画部の紹介編集
   slideshow.js        スライドショー編集
 scripts/
   main.js             上記の編集ファイルを統合
@@ -147,11 +149,11 @@ items: [
 - 左上の「☰ メニュー」を押すと、左サイドバーにタブが展開します。各タブはページ内の項目へ移動するリンクです。
 - 「閉じる ×」、背景クリック、Escapeキーで閉じられます。項目を選ぶとサイドバーを閉じて移動します。
 - メニューボタンとサイドバー見出しは tabs.js の menuLabel / heading で編集できます。
-- target は news / access / links / projects / notices から選びます。タブの順序は tabs.js の配列順です。
+- target は news / access / links / projects / notices / about から選びます。タブの順序は tabs.js の配列順です。
 - enabled: false にするとタブ全体を非表示にできます。
 - 企画は title、案内は title または body が記入されると表示します。リンクはURLとリンク文言が必要です。
 - 本文のない項目と、その項目を指すタブは表示しません。未入力の項目は掲載しません。
-- 本文の順序は main.js で「お知らせ → 企画内容 → アクセスマップ → 注意事項 → SNS」としています。
+- 本文の順序は main.js で「お知らせ → 企画内容 → アクセスマップ → 注意事項 → デーサイ企画部の紹介 → SNS」としています。
 
 ## 公開・運用
 
@@ -163,8 +165,9 @@ GitHub Pagesの設定は Settings → Pages → Deploy from a branch → main / 
 
 ## 上部スライドショー
 - 写真は assets/slideshow/ に保存し、content/slideshow.js の items に画像パスを順番に記入します。
-- 現在は demo1.jpg → demo2.jpg → demo3.jpg → demo4.jpg の順番です。
+- 現在は demo1.jpg → demo2.jpg → demo3.jpg → demo4.jpg → demophoto1.jpg → demophoto2.jpg → demophoto3.jpg の順番です。
 - interval: 6000 / transition: 1000 は、5秒静止＋1秒の切り替えです。
 - 写真全体を中央に表示します。一時停止・再生ボタンで操作できます。
 - 端末で動きを減らす設定をしている場合は停止状態から開始します。
 - 表示処理は scripts/slideshow.js に分離しています。
+
